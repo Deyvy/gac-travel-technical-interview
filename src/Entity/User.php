@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -43,6 +45,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="datetime")
      */
     private $created_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity=StockHistoric::class, mappedBy="user_id")
+     */
+    private $stockHistorics;
+
+    public function __construct()
+    {
+        $this->stockHistorics = new ArrayCollection();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +150,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StockHistoric>
+     */
+    public function getStockHistorics(): Collection
+    {
+        return $this->stockHistorics;
+    }
+
+    public function addStockHistoric(StockHistoric $stockHistoric): self
+    {
+        if (!$this->stockHistorics->contains($stockHistoric)) {
+            $this->stockHistorics[] = $stockHistoric;
+            $stockHistoric->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockHistoric(StockHistoric $stockHistoric): self
+    {
+        if ($this->stockHistorics->removeElement($stockHistoric)) {
+            // set the owning side to null (unless already changed)
+            if ($stockHistoric->getUserId() === $this) {
+                $stockHistoric->setUserId(null);
+            }
+        }
 
         return $this;
     }
