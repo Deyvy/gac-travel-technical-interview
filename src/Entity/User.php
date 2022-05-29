@@ -54,6 +54,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->stockHistorics = new ArrayCollection();
+        // Seteamos los valores en el constructor
+        $this->active = true;
+        $this->created_at = new \DateTime();
+        // El rol por defecto es ROLE_ADMIN, según nos pide la prueba
+        $this->roles = ['ROLE_ADMIN'];
     }
     public function getId(): ?int
     {
