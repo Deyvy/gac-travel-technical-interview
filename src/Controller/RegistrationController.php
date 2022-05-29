@@ -34,7 +34,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->render('main/success.html.twig');
+            return $this->render('messages/success.html.twig');
         }
 
         return $this->render('registration/sign-up.html.twig', [
