@@ -30,7 +30,7 @@ class Categories
     private $created_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=Products::class, mappedBy="category_id")
+     * @ORM\OneToMany(targetEntity=Products::class, mappedBy="category")
      */
     private $products;
 

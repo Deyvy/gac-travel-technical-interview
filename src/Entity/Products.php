@@ -28,7 +28,7 @@ class Products
      * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category_id;
+    private $category;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -41,7 +41,7 @@ class Products
     private $stock;
 
     /**
-     * @ORM\OneToMany(targetEntity=StockHistoric::class, mappedBy="product_id")
+     * @ORM\OneToMany(targetEntity=StockHistoric::class, mappedBy="product")
      */
     private $stockHistorics;
 
@@ -67,14 +67,14 @@ class Products
         return $this;
     }
 
-    public function getCategoryId(): ?Categories
+    public function getCategory(): ?Categories
     {
-        return $this->category_id;
+        return $this->category;
     }
 
-    public function setCategoryId(?Categories $category_id): self
+    public function setCategoryId(?Categories $category): self
     {
-        $this->category_id = $category_id;
+        $this->category = $category;
 
         return $this;
     }
