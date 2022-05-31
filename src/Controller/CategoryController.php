@@ -41,15 +41,8 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_category_show')]
-    public function show(Categories $category): Response
-    {
-        return $this->render('category/show.html.twig', [
-            'category' => $category,
-        ]);
-    }
 
-    #[Route('/{id}/edit', name: 'app_category_edit')]
+    #[Route('/edit/{id}', name: 'edit-category')]
     public function edit(Request $request, Categories $category, CategoriesRepository $categoriesRepository): Response
     {
         $form = $this->createForm(CategoriesType::class, $category);
@@ -57,12 +50,12 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categoriesRepository->add($category);
-            return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('categories', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('category/edit.html.twig', [
+        return $this->renderForm('category/edit_category.html.twig', [
             'category' => $category,
-            'form' => $form,
+            'categoryForm' => $form,
         ]);
     }
 

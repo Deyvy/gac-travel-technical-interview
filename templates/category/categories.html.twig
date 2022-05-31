@@ -94,12 +94,8 @@
                                             <td class="text-left">{{ category.name }}</td>
                                             <td class="text-center">{{ category.ID }}</td>
                                             <td class="text-center">  
-                                                <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{category.id}}">
+                                                <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{path('edit-category', {id: category.id})  }}">
                                                     <i class="ri-pencil-line"></i>
-                                                </a>
-
-                                                <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar" href="{{category.id}}">
-                                                    <i class="las la-times"></i>
                                                 </a>
                                             </td>
                                         </tr>

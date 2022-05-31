@@ -36,6 +36,7 @@ class UserController extends AbstractController
                 $user,
                 $form->get('password')->getData()
             );
+            // Y la seteamos y guardamos encodeada
             $userRepository->upgradePassword($user, $password);
             $userRepository->add($user);
             return $this->redirectToRoute('users');
@@ -43,32 +44,31 @@ class UserController extends AbstractController
 
         return $this->renderForm('user/add_user.html.twig', [
             'user' => $user,
-            'editUserForm' => $form,
+            'addUserForm' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show')]
-    public function show(User $user): Response
+    #[Route('/edit/{id}', name: 'edit-user')]
+    public function edit(Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_user_edit')]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
-    {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(CreateUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Hacemos encode de la contraseña
+            $password = $userPasswordHasher->hashPassword(
+                $user,
+                $form->get('password')->getData()
+            );
+            // Y la seteamos y guardamos encodeada
+            $userRepository->upgradePassword($user, $password);
             $userRepository->add($user);
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('users', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/edit.html.twig', [
+        return $this->renderForm('user/edit_user.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'editUserForm' => $form,
         ]);
     }
 }

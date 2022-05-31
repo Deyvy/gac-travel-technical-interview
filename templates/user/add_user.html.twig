@@ -72,14 +72,14 @@
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            {{ form_start(editUserForm)}}
+                            {{ form_start(addUserForm)}}
                                 <div class="row">
                                     <div class="col-md-12">
                                         <!-- CON ERROR 
                                         <div class="form-group has-error has-danger">-->                 
                                         <div class="form-group">
-                                            {{ form_row(editUserForm.username) }}
-                                            {{ form_row(editUserForm.password) }}
+                                            {{ form_row(addUserForm.username) }}
+                                            {{ form_row(addUserForm.password) }}
                                             <!-- CON ERROR  
                                             <div class="help-block with-errors">
                                                 <ul class="list-unstyled">
@@ -89,10 +89,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-5 text-center">
-                                        <button type="submit" class="btn btn-primary mr-2">Añadir categoría</button>
+                                        <button type="submit" class="btn btn-primary mr-2">Añadir usuario</button>
                                     </div>
                                 </div>
-                            {{ form_end(editUserForm) }}
+                            {{ form_end(addUserForm) }}
                         </div> 
                     </div>
                 </div>

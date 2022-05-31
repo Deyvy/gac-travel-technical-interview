@@ -40,7 +40,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_product_edit')]
+    #[Route('/edit/{id}', name: 'edit-product')]
     public function edit(Request $request, Products $product, ProductsRepository $productsRepository): Response
     {
         $form = $this->createForm(ProductsType::class, $product);
@@ -48,22 +48,14 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $productsRepository->add($product);
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('products');
         }
 
-        return $this->renderForm('product/edit.html.twig', [
+        return $this->renderForm('product/edit_product.html.twig', [
             'product' => $product,
-            'form' => $form,
+            'productForm' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_delete')]
-    public function delete(Request $request, Products $product, ProductsRepository $productsRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
-            $productsRepository->remove($product);
-        }
 
-        return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
-    }
 }

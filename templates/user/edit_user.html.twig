@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Usuarios - Stockify{% endblock %}
+{% block title %}Editar usuario - Stockify{% endblock %}
 
-{% block body %}
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
+{% block body %} 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/css/backend-plugin.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/backend.css?v=1.0.0') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/remixicon/fonts/remixicon.css') }}">
+        <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
+        <link rel="stylesheet" href="{{asset('assets/css/backend-plugin.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/backend.css?v=1.0.0')}}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/remixicon/fonts/remixicon.css')}}">
     </head>
     <body class="  ">
         <!-- loader Start -->
@@ -27,7 +23,7 @@
             <div class="iq-sidebar  sidebar-default ">
                 <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
                     <a href="{{path('app_logout')}}" class="header-logo">
-                        <img src="{{ asset('assets/images/logo.png') }}" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
+                        <img src="{{asset('assets/images/logo.png')}}" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
                     </a>
                     <div class="iq-menu-bt-sidebar ml-0">
                         <i class="las la-bars wrapper-menu"></i>
@@ -71,38 +67,32 @@
                         <div class="col-lg-12">
                             <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                 <div>
-                                    <h4 class="mb-3">Usuarios</h4>
+                                    <h4 class="mb-3">Editar usuario</h4>
                                 </div>
-                                <a href="{{path('add-user')}}" class="btn btn-primary add-list">
-                                    <i class="las la-plus mr-3"></i>Nuevo usuario
-                                </a>
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <div class="table-responsive mb-3">
-                                <table class="table mb-0 tbl-server-info no-footer" role="grid">
-                                    <thead class="bg-white text-uppercase">
-                                        <tr class="ligth ligth-data" role="row">
-                                            <th class="text-left">Nombre</th>
-                                            <th class="text-center">Código</th>
-                                            <th class="text-center">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for user in users %}
-                                        <tr>
-                                            <td class="text-left">{{ user.username }}</td>
-                                            <td class="text-center">{{ user.id }}</td>
-                                            <td class="text-center">
-                                                <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{ path('edit-user', {id: user.id})}}">
-                                                    <i class="ri-pencil-line"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                            {{ form_start(editUserForm)}}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- CON ERROR 
+                                        <div class="form-group has-error has-danger">-->                 
+                                        <div class="form-group">
+                                            {{ form_row(editUserForm.username) }}
+                                            {{ form_row(editUserForm.password) }}
+                                            <!-- CON ERROR  
+                                            <div class="help-block with-errors">
+                                                <ul class="list-unstyled">
+                                                    <li>Rellene este campo.</li>
+                                                </ul>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5 text-center">
+                                        <button type="submit" class="btn btn-primary mr-2">Guardar usuario</button>
+                                    </div>
+                                </div>
+                            {{ form_end(editUserForm) }}
                         </div> 
                     </div>
                 </div>
@@ -110,8 +100,10 @@
         </div>
     
         <!-- Backend Bundle JavaScript -->
-        <script src="{{ asset('assets/js/backend-bundle.min.js') }}"></script>
+        <script src="{{asset('assets/js/backend-bundle.min.js')}}"></script>
     
         <!-- app JavaScript -->
-        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="{{asset('assets/js/app.js')}}"></script>
+    </body>
+</html>
 {% endblock %}
