@@ -47,6 +47,18 @@ class ProductsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function removeStock(Products $entity, bool $flush = true): void
+    {
+        $entity->setStock(0);
+        if ($flush) {
+            $this->_em->flush();
+        }
+    }
+
     // /**
     //  * @return Products[] Returns an array of Products objects
     //  */

@@ -98,9 +98,11 @@
                                             <td class="text-left">{{ product.category.name }}</td>
                                             <td class="text-center">{{ product.stock }}</td>
                                             <td class="text-right">
-                                                <a class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar stock" href="{{product.id}}">
+                                                {# Al pulsar en Eliminar stock, pondremos el stock a 0 #}
+                                                <a class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar stock" href="{{path('remove-stock', {id: product.id})}}">
                                                     <i class="las la-minus"></i>
                                                 </a>
+                                                {# Al pulsar en Añadir stock, recalcularemos stock según ponga número positivo o negativo #}
                                                 <a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Añadir stock" href="{{product.id}}">
                                                     <i class="las la-plus"></i>
                                                 </a>

@@ -57,5 +57,11 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/removeStock/{id}', name: 'remove-stock')]
+    public function removeStock(Request $request, Products $product, ProductsRepository $productsRepository): Response
+    {
+        $productsRepository->removeStock($product);
+        return $this->redirectToRoute('products');
+    }
 
 }
