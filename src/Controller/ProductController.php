@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Products;
 use App\Form\ProductsType;
+use App\Form\StockType;
 use App\Repository\ProductsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,4 +65,24 @@ class ProductController extends AbstractController
         return $this->redirectToRoute('products');
     }
 
+    #[Route('/edit-stock/{id}', name: 'edit-stock')]
+    public function editStock(Request $request, Products $product, ProductsRepository $productsRepository): Response
+    {
+        // Clonamos el producto para rescatar la cantidad original de stock antes de hacer el persist con el form
+        $originalProduct = clone $product;
+
+        $form = $this->createForm(StockType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Entonces procedemos a recalcular el stock en el repositorio
+            $productsRepository->recalculateStock($product, $originalProduct);
+            return $this->redirectToRoute('products');
+        }
+
+        return $this->renderForm('product/edit_product_stock.html.twig', [
+            'product' => $product,
+            'stockForm' => $form,
+        ]);
+    }
 }

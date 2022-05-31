@@ -59,6 +59,19 @@ class ProductsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function recalculateStock(Products $product, Products $originalProduct, bool $flush = true): void
+    {
+        // Recalculamos el stock basándonos en el stock del original
+        $product->setStock($originalProduct->getStock() + $product->getStock());
+        if ($flush) {
+            $this->_em->flush();
+        }
+    }
+
     // /**
     //  * @return Products[] Returns an array of Products objects
     //  */
