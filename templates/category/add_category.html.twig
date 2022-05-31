@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorías - Stockify{% endblock %}
+{% block title %}Nuevo producto - Stockify{% endblock %}
 
-{% block body %}
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
+{% block body %} 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/css/backend-plugin.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/backend.css?v=1.0.0') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/remixicon/fonts/remixicon.css') }}">
+        <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
+        <link rel="stylesheet" href="{{asset('assets/css/backend-plugin.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/backend.css?v=1.0.0')}}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/remixicon/fonts/remixicon.css')}}">
     </head>
     <body class="  ">
         <!-- loader Start -->
@@ -27,7 +23,7 @@
             <div class="iq-sidebar  sidebar-default ">
                 <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
                     <a href="{{path('app_logout')}}" class="header-logo">
-                        <img src="{{ asset('assets/images/logo.png') }}" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
+                        <img src="{{asset('assets/images/logo.png')}}" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
                     </a>
                     <div class="iq-menu-bt-sidebar ml-0">
                         <i class="las la-bars wrapper-menu"></i>
@@ -36,7 +32,7 @@
                 <div class="data-scrollbar" data-scroll="1">
                     <nav class="iq-sidebar-menu">
                         <ul id="iq-sidebar-toggle" class="iq-menu">
-                            <li class="active">
+                            <li>
                                 <a href="{{path('products')}}" class="svg-icon">                        
                                     <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
@@ -44,8 +40,8 @@
                                     <span class="ml-4">Productos</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{path('categories')}}" class="svg-icon">                        
+                            <li class="active">
+                                <a href="categories.html" class="svg-icon">                        
                                     <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                     </svg>
@@ -53,7 +49,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="svg-icon">                        
+                                <a href="../backend/index.html" class="svg-icon">                        
                                     <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                     </svg>
@@ -71,42 +67,31 @@
                         <div class="col-lg-12">
                             <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                 <div>
-                                    <h4 class="mb-3">Categorías</h4>
+                                    <h4 class="mb-3">Nueva categoría</h4>
                                 </div>
-                                <a href="{{path('add-category')}}" class="btn btn-primary add-list">
-                                    <i class="las la-plus mr-3"></i>Nueva categoría
-                                </a>
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <div class="table-responsive mb-3">
-                                <table class="table mb-0 tbl-server-info no-footer" role="grid">
-                                    <thead class="bg-white text-uppercase">
-                                        <tr class="ligth ligth-data" role="row">
-                                            <th class="text-left">Nombre</th>
-                                            <th class="text-center">Código</th>
-                                            <th class="text-center">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for category in categories %}
-                                        <tr>
-                                            <td class="text-left">{{ category.name }}</td>
-                                            <td class="text-center">{{ category.ID }}</td>
-                                            <td class="text-center">  
-                                                <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{category.id}}">
-                                                    <i class="ri-pencil-line"></i>
-                                                </a>
-
-                                                <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar" href="{{category.id}}">
-                                                    <i class="las la-times"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                            {{ form_start(categoryForm)}}
+                                <div class="row">
+                                    <div class="col-md-12">    
+                                        <!-- CON ERROR 
+                                        <div class="form-group has-error has-danger">-->                 
+                                        <div class="form-group">
+                                            {{ form_row(categoryForm.name) }}
+                                            <!-- CON ERROR  
+                                            <div class="help-block with-errors">
+                                                <ul class="list-unstyled">
+                                                    <li>Rellene este campo.</li>
+                                                </ul>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5 text-center">
+                                        <button type="submit" class="btn btn-primary mr-2">Añadir categoría</button>
+                                    </div>
+                                </div>
+                            {{ form_end(categoryForm) }}
                         </div> 
                     </div>
                 </div>
@@ -114,8 +99,10 @@
         </div>
     
         <!-- Backend Bundle JavaScript -->
-        <script src="{{ asset('assets/js/backend-bundle.min.js') }}"></script>
+        <script src="{{asset('assets/js/backend-bundle.min.js')}}"></script>
     
         <!-- app JavaScript -->
-        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="{{asset('assets/js/app.js')}}"></script>
+    </body>
+</html>
 {% endblock %}

@@ -29,13 +29,15 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Añadimos la categoría
             $categoriesRepository->add($category);
-            return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+            // Una vez terminado, redirigimos de vuelta a la lista de categorías
+            return $this->redirectToRoute('categories');
         }
 
-        return $this->renderForm('category/new.html.twig', [
+        return $this->renderForm('category/add_category.html.twig', [
             'category' => $category,
-            'form' => $form,
+            'categoryForm' => $form,
         ]);
     }
 
