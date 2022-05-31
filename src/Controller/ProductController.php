@@ -2,19 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Categories;
 use App\Entity\Products;
 use App\Form\ProductsType;
 use App\Repository\ProductsRepository;
-use App\Repository\CategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/products')]
 class ProductController extends AbstractController
 {
-    #[Route('/products', name: 'products')]
+    #[Route('/', name: 'products')]
     public function index(ProductsRepository $productsRepository): Response
     {
         return $this->render('product/products.html.twig', [
@@ -23,7 +22,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/add', name: 'add-product')]
-    public function add(Request $request, ProductsRepository $productsRepository, CategoriesRepository $categoriesRepository): Response
+    public function add(Request $request, ProductsRepository $productsRepository): Response
     {
         $product = new Products();
         $form = $this->createForm(ProductsType::class, $product);

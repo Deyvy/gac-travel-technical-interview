@@ -37,6 +37,7 @@ class Categories
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
