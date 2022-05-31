@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\CreateUserType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/users')]
@@ -22,20 +24,26 @@ class UserController extends AbstractController
     }
 
     #[Route('/add', name: 'add-user')]
-    public function add(Request $request, UserRepository $userRepository): Response
+    public function add(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(CreateUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Hacemos encode de la contraseña
+            $password = $userPasswordHasher->hashPassword(
+                $user,
+                $form->get('password')->getData()
+            );
+            $userRepository->upgradePassword($user, $password);
             $userRepository->add($user);
-            return $this->redirectToRoute('app_user_index');
+            return $this->redirectToRoute('users');
         }
 
-        return $this->renderForm('user/new.html.twig', [
+        return $this->renderForm('user/add_user.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'editUserForm' => $form,
         ]);
     }
 
