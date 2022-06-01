@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Productos - Stockify{% endblock %}
+{% block title %}Histórico - Stockify{% endblock %}
 
 {% block body %}
     <head>
@@ -71,11 +71,9 @@
                         <div class="col-lg-12">
                             <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                 <div>
-                                    <h4 class="mb-3">Productos</h4>
+                                    {# Para no repetir siempre el mismo nombre, traemos el nombre del producto y lo ponemos en el título #}
+                                    <h4 class="mb-3">{{ stockHistoric.0.product.name }}</h4>
                                 </div>
-                                <a href="{{path('add-product')}}" class="btn btn-primary add-list">
-                                    <i class="las la-plus mr-3"></i>Nuevo producto
-                                </a>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -83,36 +81,21 @@
                                 <table class="table mb-0 tbl-server-info no-footer" role="grid">
                                     <thead class="bg-white text-uppercase">
                                         <tr class="ligth ligth-data" role="row">
-                                            <th class="text-left">Nombre</th>
+                                            <th class="text-left">Producto</th>
+                                            <th class="text-left">Fecha</th>
                                             <th class="text-left">Código</th>
-                                            <th class="text-left">Categoría</th>
                                             <th class="text-center">Stock</th>
-                                            <th class="text-right">Acciones</th>
+                                            <th class="text-right">Usuario</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for product in products %}
+                                        {% for historic in stockHistoric %}
                                         <tr>
-                                            <td class="text-left">{{ product.name }}</td>
-                                            <td class="text-left">{{ product.id }}</td>
-                                            <td class="text-left">{{ product.category.name }}</td>
-                                            <td class="text-center">{{ product.stock }}</td>
-                                            <td class="text-right">
-                                                {# Al pulsar en Eliminar stock, pondremos el stock a 0 #}
-                                                <a class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar stock" href="{{path('remove-stock', {id: product.id})}}">
-                                                    <i class="las la-minus"></i>
-                                                </a>
-                                                {# Al pulsar en Añadir stock, recalcularemos stock según ponga número positivo o negativo #}
-                                                <a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Añadir stock" href="{{path('edit-stock', {id: product.id})}}">
-                                                    <i class="las la-plus"></i>
-                                                </a>
-                                                <a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Histórico" href="{{path('stock_historic', {id: product.id})}}">
-                                                    <i class="las la-history"></i>
-                                                </a>
-                                                <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{path('edit-product', {id: product.id})}}">
-                                                    <i class="ri-pencil-line"></i>
-                                                </a>
-                                            </td>
+                                            <td class="text-left">{{ historic.product.name }}</td>
+                                            <td class="text-left">{{ historic.createdAt|date('d-m-Y') }}</td>
+                                            <td class="text-left">{{ historic.id }}</td>
+                                            <td class="text-center">{{ historic.stock }}</td>
+                                            <td class="text-right">{{ historic.user.username }}</td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
