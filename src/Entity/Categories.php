@@ -37,6 +37,7 @@ class Categories
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        // Al crearlo seteamos la fecha en el constructor
         $this->created_at = new \DateTime();
     }
 
