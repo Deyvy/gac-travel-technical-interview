@@ -66,7 +66,13 @@ class ProductsRepository extends ServiceEntityRepository
     public function recalculateStock(Products $product, Products $originalProduct, bool $flush = true): void
     {
         // Recalculamos el stock basándonos en el stock del original
-        $product->setStock($originalProduct->getStock() + $product->getStock());
+        if($product->getStock() + $originalProduct->getStock() <= 0) {
+            // Si es menor que 0, seteamos el stock a 0
+            $product->setStock(0);
+        } else {
+            // Si es mayor que 0, seteamos el stock a la suma del stock del producto actual y el stock del producto original
+            $product->setStock($product->getStock() + $originalProduct->getStock());
+        }
         if ($flush) {
             $this->_em->flush();
         }

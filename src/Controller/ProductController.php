@@ -76,6 +76,7 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Entonces procedemos a recalcular el stock en el repositorio
+            // Podríamos hacerlo en un servicio, pero he preferido hacerlo en el repositorio por no crear el servicio para una sola tarea
             $productsRepository->recalculateStock($product, $originalProduct);
             return $this->redirectToRoute('products');
         }
