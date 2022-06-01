@@ -72,7 +72,15 @@
                             <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                                 <div>
                                     {# Para no repetir siempre el mismo nombre, traemos el nombre del producto y lo ponemos en el título #}
-                                    <h4 class="mb-3">{{ stockHistoric.0.product.name }}</h4>
+                                    <h4 class="mb-3">
+                                        {# Controlamos que no venga vacío #}
+                                        {% if stockHistoric.0.product.name is defined %} 
+                                            {{stockHistoric.0.product.name}} 
+                                        {% else %} 
+                                            {# Y si viene vacío ponemos un texto por defecto #}
+                                            Histórico 
+                                        {% endif %}
+                                    </h4>
                                 </div>
                             </div>
                         </div>

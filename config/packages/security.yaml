@@ -41,4 +41,6 @@ security:
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/products, roles: ROLE_ADMIN }
-        - { path: ^/categories, roles: ROLE_ADMIN }
+        - { path: ^/category, roles: ROLE_ADMIN }
+        - { path: ^/users, roles: ROLE_ADMIN }
+        - { path: ^/stockHistoric, roles: ROLE_ADMIN }
