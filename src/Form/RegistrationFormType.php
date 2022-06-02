@@ -18,7 +18,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'required' => true,
-                'label' => 'Usuario',
+                'label' => ' ',
                 'attr' => [
                     'class' => 'floating-input form-control'
                 ]
@@ -27,7 +27,7 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'label' => 'Contraseña',
+                'label' => ' ',
                 'attr' => [
                     'class' => 'floating-input form-control',
                     'autocomplete' => 'new-password'],
